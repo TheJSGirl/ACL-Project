@@ -9,7 +9,7 @@ if(env === 'development'){
         host: 'localhost',
         user: 'root',
         password: 'pinku',
-        database: 'registerLogin'
+        database: 'acl_db'
     }
 }
 
@@ -19,7 +19,7 @@ if(env === 'test'){
         host: 'localhost',
         user: 'root',
         password: 'pinku',
-        database: 'registerLogin_test'
+        database: 'acl_db_test'
     }
 }
 

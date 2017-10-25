@@ -2,7 +2,7 @@ const registerRoutes = require('express').Router();
 const pool = require('../../db');
 const bcrypt = require('bcrypt');
 const {sendResponse} = require('../../helper');
-const {check} = require('express-validator/check');
+// const {check} = require('express-validator/check');
 
 
 
@@ -10,18 +10,18 @@ registerRoutes.route('/')
     .post(async (req, res) => {
 
     //validating the email password and name
-    req.check('user_name', 'must required').exists().isLength({min:5});
-    req.check('email', 'invalid email').exists().isEmail();
-    req.check('password', 'invalid credentials').exists().isLength({min:5});
+    // req.check('user_name', 'must required').exists().isLength({min:5});
+    // req.check('email', 'invalid email').exists().isEmail();
+    // req.check('password', 'invalid credentials').exists().isLength({min:5});
 
-    let errors = req.validationErrors();
-    if(errors){
-        console.log(error);
-        return res.status(400).json({
-            data:[],
-            message:errors[0].msg
-        });
-    }
+    // let errors = req.validationErrors();
+    // if(errors){
+    //     console.log(error);
+    //     return res.status(400).json({
+    //         data:[],
+    //         message:errors[0].msg
+    //     });
+    // }
 
     console.log(req.body);
     const {user_name, email, password} = req.body;
@@ -60,10 +60,14 @@ registerRoutes.route('/')
 
     }
     catch(err){
-    console.log(err);
+    console.error(err);
     
     if(code === 'ER_DATA_TOO_LONG'){
         return sendResponse(res, 500, [], 'password too long');
+    }
+
+    if(err.code == 'ER_DUP_ENTRY'){
+        return sendResponse(res, 409, [], 'already exists');
     }
 
     return sendResponse(res, 500, [], 'something went wrong');
