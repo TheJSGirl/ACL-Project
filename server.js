@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const v1Routes = require('./routes/v1');
-// const expressValidator = require('express-validator/check');
+const expressValidator = require('express-validator');
 const port =  3000;
 
 //initiate app
@@ -10,7 +10,7 @@ const app = express();
 //middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(expressValidator());
+app.use(expressValidator());
 
 
 //routes middleware

@@ -2,7 +2,7 @@ const loginRoutes = require('express').Router();
 const pool = require('../../db');
 const bcrypt = require('bcrypt');
 const {sendResponse} = require('../../helper');
-const jwt = require('json-web-token');
+const jwt = require('jsonwebtoken');
 
 loginRoutes.route('/')
   .post(async (req, res) => {
@@ -11,7 +11,7 @@ loginRoutes.route('/')
 
     try{
       
-      const [data] = await pool.query(`SELECT id, password ,user_type FROM users WHERE user_name = '${user_name}'`);
+      const [data] = await pool.query(`SELECT id, password ,userType FROM users WHERE user_name = '${user_name}'`);
       
       const passwordFromDb = data[0].password;
 
