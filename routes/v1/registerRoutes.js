@@ -10,7 +10,7 @@ registerRoutes.route('/')
     .post(async (req, res) => {
 
     // validating the email password and name
-    req.check('userName', 'userName is required').exists().isLength({min:5});
+    req.check('userName', 'user_name is required').exists().isLength({min:5});
     req.check('email', 'invalid email').exists().isEmail();
     req.check('password', 'invalid credentials').exists().isLength({min:5});
 
@@ -40,7 +40,7 @@ registerRoutes.route('/')
     const hashedpass = await bcrypt.hash(password, 10);
 
     const user_detail = {
-    userName,
+    user_name: userName,
     email,
     password: hashedpass
     };
